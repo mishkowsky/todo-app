@@ -1,5 +1,4 @@
-name: Build and Test React Application
-
+name: Build and Test React frontend
 on:
   push:
     paths:
