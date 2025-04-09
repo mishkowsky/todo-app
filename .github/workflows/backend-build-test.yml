@@ -1,5 +1,5 @@
 
-name: Build and test Python backend
+name: Build and Test Python backend
 
 on:
   push:
