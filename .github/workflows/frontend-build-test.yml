@@ -4,11 +4,10 @@ name: Build and Test React Application
 on:
   push:
     paths:
-      - .github/workflows/**
+      - .github/workflows/frontend-build-test.yml
       - frontend/**
   pull_request:
     paths:
-      - .github/workflows/**
       - frontend/**
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
