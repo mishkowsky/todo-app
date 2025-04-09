@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 
 from src.database import Base
-from src.main import get_db, app
+from src.main import get_db, app, engine
 
 
 @pytest.fixture(scope="module")
@@ -21,4 +21,5 @@ def test_db():
 @pytest.fixture(scope="module")
 def client(test_db):
     app.dependency_overrides[get_db] = lambda: test_db
+    app.dependency_overrides[engine] = create_engine("sqlite:///./test.db")
     yield TestClient(app)
