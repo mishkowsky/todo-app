@@ -39,13 +39,13 @@ class DBConfigInstance:
 
 DB_CONFIG = DBConfigInstance(
     DBConfig(
-        DBMS=os.getenv("DBMS"),
-        DRIVER=os.getenv("DB_DRIVER"),
-        HOSTNAME=os.getenv("DB_HOSTNAME"),
-        DATABASE=os.getenv("DB_DATABASE"),
-        USERNAME=os.getenv("DB_USERNAME"),
-        PASSWORD=os.getenv("DB_PASSWORD"),
-        config_name='debugging_config'
+        DBMS=os.getenv("DBMS", "postgresql"),
+        DRIVER=os.getenv("DB_DRIVER", "psycopg2"),
+        HOSTNAME=os.getenv("DB_HOSTNAME", "localhost"),
+        DATABASE=os.getenv("DB_DATABASE", "todo-app"),
+        USERNAME=os.getenv("DB_USERNAME", "postgres"),
+        PASSWORD=os.getenv("DB_PASSWORD", "postgres"),
+        config_name='prod_config'
     ))
 
 engine = create_engine(DB_CONFIG.DB_URI)
