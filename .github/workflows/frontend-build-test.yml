@@ -1,33 +1,44 @@
-name: Build and Test React Application
-
-# Controls when the action will run. 
+name: Build and Test React frontend
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    paths:
+      - .github/workflows/frontend-build-test.yml
+      - frontend/**
   pull_request:
-    branches: [ master ]
+    paths:
+      - frontend/**
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build_test:
-    # The type of runner that the job will run on
+  build:
+  
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - name: Use Node.js 15.x
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm ci, build and test
+          node-version: 15.x
+      - name: npm ci, build
+        working-directory: ./frontend
         run: |
           npm ci
           npm run build --if-present
-          npm test      
+  
+  test:
+    needs: build
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 15.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 15.x
+      - name: npm ci, build
+        working-directory: ./frontend
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test   
