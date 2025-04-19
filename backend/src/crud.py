@@ -1,39 +1,51 @@
+import datetime
+
+from sqlalchemy import false, true
 from sqlalchemy.orm import Session
-from src.models import TodoItem
-from src.schemas import TodoItemCreate
+from sqlalchemy.sql.operators import and_, or_
+
+from src.models import Task
+from src.schemas import TaskItemPatch, TaskItemCreateUpdate
 
 
-def get_todo_items(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(TodoItem).offset(skip).limit(limit).all()
+def get_task_count(db: Session):
+    return int(db.query(Task).count())
 
 
-def create_todo_item(db: Session, todo_item: TodoItemCreate):
-    db_todo_item = TodoItem(**todo_item.dict())
-    db.add(db_todo_item)
+def get_task_items(db: Session):
+    return db.query(Task).order_by(Task.deadline.asc(), Task.created_at.asc()).all()
+
+
+def create_task_item(db: Session, task_item: TaskItemCreateUpdate):
+    db_task_item = Task(**task_item.dict())
+    db_task_item.created_at = datetime.datetime.now()
+    db_task_item.completed = False
+    print(db_task_item)
+    db.add(db_task_item)
     db.commit()
-    db.refresh(db_todo_item)
-    return db_todo_item
+    db.refresh(db_task_item)
+    return db_task_item
 
 
-def get_todo_item(db: Session, todo_id: int):
-    return db.query(TodoItem).filter(TodoItem.id == todo_id).first()
+def get_task_item(db: Session, task_id: int):
+    return db.query(Task).filter(Task.id == task_id).first()
 
 
-def update_todo_item(db: Session, todo_id: int, todo_item: TodoItemCreate):
-    db_todo_item = get_todo_item(db, todo_id)
-    if db_todo_item:
-        for key, value in todo_item.dict().items():
-            setattr(db_todo_item, key, value)
+def update_task_item(db: Session, task_id: int, task_item: TaskItemCreateUpdate | TaskItemPatch):
+    db_task_item = get_task_item(db, task_id)
+    if db_task_item:
+        for key, value in task_item.dict().items():
+            setattr(db_task_item, key, value)
         db.commit()
-        db.refresh(db_todo_item)
-        return db_todo_item
+        db.refresh(db_task_item)
+        return db_task_item
     return None
 
 
-def delete_todo_item(db: Session, todo_id: int):
-    db_todo_item = get_todo_item(db, todo_id)
-    if db_todo_item:
-        db.delete(db_todo_item)
+def delete_task_item(db: Session, task_id: int):
+    db_task_item = get_task_item(db, task_id)
+    if db_task_item:
+        db.delete(db_task_item)
         db.commit()
-        return db_todo_item
+        return db_task_item
     return None

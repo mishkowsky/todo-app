@@ -1,11 +1,14 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from src.database import Base
 
 
-class TodoItem(Base):
-    __tablename__ = "todo_items"
+class Task(Base):
+    __tablename__ = "task"
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
-    is_done = Column(Boolean)
     description = Column(String)
+    deadline = Column(DateTime)
+    created_at = Column(DateTime)
+    completed = Column(Boolean)
+    completed_at = Column(DateTime)

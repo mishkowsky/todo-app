@@ -1,15 +1,18 @@
-from fastapi import FastAPI, Depends, HTTPException
+import uvicorn
+from fastapi import FastAPI, Depends, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from src import models
-from src.crud import create_todo_item, get_todo_item, update_todo_item, get_todo_items, delete_todo_item
+from src.crud import create_task_item, get_task_item, update_task_item, get_task_items, delete_task_item, get_task_count
 from src.database import engine, get_db
-from src.schemas import TodoItem, TodoItemCreate
+from src.schemas import TaskItem, TaskItemPatch, TaskItemCreateUpdate
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+prefix_router = APIRouter(prefix="/api")
 
 origins = ["*"]
 
@@ -22,36 +25,49 @@ app.add_middleware(
 )
 
 
-@app.post("/todo/", response_model=TodoItem)
-def create_todo(todo: TodoItemCreate, db: Session = Depends(get_db)):
-    return create_todo_item(db=db, todo_item=todo)
+@prefix_router.post("/tasks", response_model=TaskItem)
+def create_task(task: TaskItemCreateUpdate, db: Session = Depends(get_db)):
+    return create_task_item(db=db, task_item=task)
 
 
-@app.get("/todo/", response_model=list[TodoItem])
-def read_todos(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    todos = get_todo_items(db=db, skip=skip, limit=limit)
-    return todos
+@prefix_router.get("/tasks", response_model=list[TaskItem])
+def read_tasks(db: Session = Depends(get_db)):
+    return get_task_items(db=db)
 
 
-@app.get("/todo/{todo_id}", response_model=TodoItem)
-def read_todo(todo_id: int, db: Session = Depends(get_db)):
-    db_todo = get_todo_item(db=db, todo_id=todo_id)
-    if db_todo is None:
-        raise HTTPException(status_code=404, detail="Todo not found")
-    return db_todo
+@prefix_router.get("/tasks/{task_id}", response_model=TaskItem)
+def read_task(task_id: int, db: Session = Depends(get_db)):
+    db_task = get_task_item(db=db, task_id=task_id)
+    if db_task is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return db_task
 
 
-@app.put("/todo/{todo_id}", response_model=TodoItem)
-def update_todo(todo_id: int, todo: TodoItemCreate, db: Session = Depends(get_db)):
-    updated_todo = update_todo_item(db=db, todo_id=todo_id, todo_item=todo)
-    if updated_todo is None:
-        raise HTTPException(status_code=404, detail="Todo not found")
-    return updated_todo
+@prefix_router.put("/tasks/{task_id}", response_model=TaskItem)
+def update_task(task_id: int, task: TaskItemCreateUpdate, db: Session = Depends(get_db)):
+    updated_task = update_task_item(db=db, task_id=task_id, task_item=task)
+    if updated_task is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return updated_task
 
 
-@app.delete("/todo/{todo_id}", response_model=TodoItem)
-def delete_todo(todo_id: int, db: Session = Depends(get_db)):
-    deleted_todo = delete_todo_item(db=db, todo_id=todo_id)
-    if deleted_todo is None:
-        raise HTTPException(status_code=404, detail="Todo not found")
-    return deleted_todo
+@prefix_router.delete("/tasks/{task_id}", response_model=TaskItem)
+def delete_task(task_id: int, db: Session = Depends(get_db)):
+    deleted_task = delete_task_item(db=db, task_id=task_id)
+    if deleted_task is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return deleted_task
+
+
+@prefix_router.patch("/tasks/{task_id}", response_model=TaskItem)
+def patch_completed_task(task_id: int, task: TaskItemPatch, db: Session = Depends(get_db)):
+    updated_task = update_task_item(db=db, task_id=task_id, task_item=task)
+    if updated_task is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return updated_task
+
+
+app.include_router(prefix_router)
+
+if __name__ == '__main__':
+    uvicorn.run(app, port=8000, host='0.0.0.0')

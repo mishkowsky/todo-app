@@ -1,5 +1,4 @@
 import os
-from dataclasses import dataclass
 from typing import Generator
 
 from dotenv import load_dotenv

@@ -1,0 +1,510 @@
+.builderEc2776a4c27444fbada4fda3b589f882:hover {
+  background: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px #4299e14d;
+}
+.builderEc2776a4c27444fbada4fda3b589f882:active {
+  transform: translateY(0);
+}
+.builderAcb154c385ef47b8a530f0c162b6382d:hover,
+.builderB6b80b4e60994f3bb4d1c733d8e697b2:hover,
+.builderA0405099440642d3b77c7827ec7eb5b9:hover,
+.builderF9afbd64eb6b46aba60280ce235cb6e0:hover {
+  opacity: 0.9;
+}
+.builderDe9ff5f18ff74d0d8f236229ad08c71c:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px #4299e11a;
+}
+.builder1f6cfe48c0064594a86010bf75610c9c:hover {
+  transform: translateY(-2px);
+}
+.builderC588c7e23dea41199252ce03f080a927:hover {
+  background: #ebf8ff;
+}
+.builder0c01c4db2e5f4fee97e39f42e98be36e:checked:before {
+  content: "";
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  background: #4299e1;
+  width: 14px;
+  height: 14px;
+  transform: scale(1);
+}
+.builder0c01c4db2e5f4fee97e39f42e98be36e:hover {
+  background: #ebf8ff;
+}
+.builder7a465a9e08934fcb8c1e8b3710d279f7:hover {
+  background: #c53030;
+}
+.builder74dcffb027ad4397a57ffe385efd25bb:hover {
+  background: #f7fafc;
+}
+.builderB3185e20cbcb4ac6a8548293e7de67df:hover {
+  background: #3182ce;
+}
+.builder772a71541aae4c55979ad464e5981489:hover {
+  background: #f7fafc;
+}
+.builder054fbf9545874a1c8f118f0de7e0900f:hover {
+  background: #c53030;
+}
+.div {
+  background-color: #fff;
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, sans-serif;
+  transition: background-color 0.3s;
+}
+@media (width<=640px) {
+  .div {
+    padding: 10px;
+  }
+}
+.h1 {
+  text-align: center;
+  color: #2d3748;
+  margin: 0 0 2rem;
+  font-size: 2.5rem;
+}
+.taskForm {
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.noTasksMessage {
+  text-align: center;
+  padding: 40px 20px;
+  color: #718096;
+  font-size: 1.1rem;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  border: 1px dashed #e2e8f0;
+}
+.formField {
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.formLabel {
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: block;
+  color: #4a5568;
+  text-align: left;
+}
+.requiredMark {
+  color: #e53e3e;
+}
+.errorMessage {
+  color: #e53e3e;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  text-align: left;
+}
+.input {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.textarea {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  resize: none;
+  overflow: hidden;
+  transition: height 0.2s ease;
+}
+.button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #4299e1;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px #4299e133;
+  box-sizing: border-box;
+}
+
+.button:disabled,
+.saveButton:disabled,
+.deleteButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+@media (width<=640px) {
+  .button {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+.filterContainer {
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  display: flex;
+}
+.filterButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: all 0.2s;
+}
+.searchContainer {
+  margin-bottom: 20px;
+  position: relative;
+}
+.searchInput {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.searchIcon {
+  color: #718096;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+.taskList {
+  gap: 20px;
+  display: grid;
+}
+@media (width<=640px) {
+  .taskList {
+    gap: 15px;
+  }
+}
+.taskItem {
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+}
+.taskHeader {
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 15px;
+  transition: all 0.2s;
+  display: flex;
+}
+.taskTitle {
+  margin: 0 0 4px 0;
+  font-size: 1.25rem;
+  text-align: left;
+}
+.searchHighlight {
+  background-color: #faf089;
+  border-radius: 2px;
+  padding: 0 0;
+}
+.taskMeta,
+.metaLabel {
+  color: #718096;
+  font-size: 0.88rem;
+  text-align: left;
+}
+.metaValue {
+  color: #4a5568;
+  font-size: 0.88rem;
+  text-align: left;
+}
+.dueDate {
+  margin-top: 4px;
+  text-align: left;
+}
+.metaValue {
+  font-size: 0.88rem;
+}
+.completedDate {
+  color: #48bb78;
+  margin-top: 4px;
+  text-align: left;
+}
+.taskActions {
+  gap: 10px;
+  display: flex;
+}
+.editButton {
+  cursor: pointer;
+  color: #4299e1;
+  background: #fff;
+  border: 1px solid #4299e1;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  transition: all 0.2s;
+  display: flex;
+}
+.checkboxLabel {
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+.checkbox {
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid #4299e1;
+  border-radius: 4px;
+  place-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  display: grid;
+}
+
+.checkbox:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loadingIndicator {
+  margin-left: 4px;
+  font-size: 1.2rem;
+  color: #4299e1;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+.taskDescription {
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+.modalOverlay {
+  z-index: 1000;
+  background-color: #00000080;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+.modalContent {
+  background: #fff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: 0 4px 6px #0000001a;
+  box-sizing: border-box;
+}
+@media (width<=640px) {
+  .modalContent {
+    width: 95%;
+    padding: 20px;
+  }
+}
+.modalTitle {
+  color: #2d3748;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: left;
+}
+.modalActions {
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+.deleteButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #e53e3e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: all 0.2s;
+}
+.actionButtons {
+  gap: 10px;
+  display: flex;
+}
+.cancelButton {
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+.saveButton {
+  color: #fff;
+  cursor: pointer;
+  background-color: #4299e1;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+.confirmDialog {
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: 0 4px 6px #0000001a;
+  box-sizing: border-box;
+}
+@media (width<=640px) {
+  .confirmDialog {
+    width: 95%;
+    padding: 20px;
+  }
+}
+.confirmTitle {
+  color: #2d3748;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+.confirmMessage {
+  color: #4a5568;
+  margin-bottom: 24px;
+}
+.confirmActions {
+  justify-content: center;
+  gap: 12px;
+  display: flex;
+}
+
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  min-width: 300px;
+  max-width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out forwards;
+  overflow: hidden;
+}
+
+.notificationExit {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.notificationContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.notificationMessage {
+  flex: 1;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.notificationClose {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0 0 16px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.notificationClose:hover {
+  opacity: 1;
+}
+
+.errorNotification {
+  background-color: #fff5f5;
+  border-left: 4px solid #e53e3e;
+  color: #c53030;
+}
+
+.successNotification {
+  background-color: #f0fff4;
+  border-left: 4px solid #48bb78;
+  color: #2f855a;
+}
+
+.infoNotification {
+  background-color: #ebf8ff;
+  border-left: 4px solid #4299e1;
+  color: #3182ce;
+}
+
+@media (width <= 640px) {
+  .notification {
+    min-width: auto;
+    width: calc(100% - 40px);
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.taskInfo {
+  text-align: left;
+  width: 100%;
+}

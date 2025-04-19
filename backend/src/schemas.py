@@ -1,18 +1,33 @@
+from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel
 
 
-class TodoItemBase(BaseModel):
+class TaskItemBase(BaseModel):
     title: str
-    is_done: bool
     description: str = None
 
 
-class TodoItemCreate(TodoItemBase):
-    pass
+# class TaskItemCreate(TaskItemBase):
+#     pass
 
 
-class TodoItem(TodoItemBase):
+class TaskItemCreateUpdate(TaskItemBase):
+    deadline: Optional[datetime] = None
+
+
+class TaskItem(TaskItemBase):
     id: int
+    completed: bool
+    created_at: datetime
+    deadline: Optional[datetime] = None
+    completed_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True
+
+
+class TaskItemPatch(BaseModel):
+    completed: bool
+    completed_at: Optional[datetime] = None
