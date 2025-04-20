@@ -25,6 +25,7 @@ const Notification: React.FC<NotificationProps> = ({
     }, duration);
 
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [duration]);
 
   const startExitAnimation = () => {
