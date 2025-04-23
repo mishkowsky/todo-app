@@ -1,0 +1,56 @@
+
+networks:
+  dev:
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - ${PATH_TO_DB_DATA}:/var/lib/postgresql/data
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dev
+
+  backend:
+#    build:
+#      context: ./backend
+    image:
+      mynewusernameyyyy/todo-app-backend
+    networks:
+      - dev
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_URI=${DB_URI}
+
+  frontend:
+#    build:
+#      context: ./frontend
+    image:
+      mynewusernameyyyy/todo-app-frontend
+    networks:
+      - dev
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+    #      - '/etc/letsencrypt:/etc/letsencrypt'
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - dev
