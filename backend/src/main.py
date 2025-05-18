@@ -1,12 +1,13 @@
 import uvicorn
-from fastapi import FastAPI, Depends, HTTPException, APIRouter
+from fastapi import FastAPI, Depends, HTTPException, APIRouter, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from src import models
 from src.crud import create_task_item, get_task_item, update_task_item, get_task_items, delete_task_item, get_task_count
 from src.database import engine, get_db
-from src.schemas import TaskItem, TaskItemPatch, TaskItemCreateUpdate
+from src.schemas import TaskItem, TaskItemPatch, TaskItemCreateUpdate, HealthCheck
+
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -23,6 +24,27 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@prefix_router.get(
+    "/healthz",
+    tags=["healthcheck"],
+    summary="Perform a Health Check",
+    response_description="Return HTTP Status Code 200 (OK)",
+    status_code=status.HTTP_200_OK,
+    response_model=HealthCheck,
+)
+def get_health() -> HealthCheck:
+    """
+    ## Perform a Health Check
+    Endpoint to perform a healthcheck on. This endpoint can primarily be used Docker
+    to ensure a robust container orchestration and management is in place. Other
+    services which rely on proper functioning of the API service will not deploy if this
+    endpoint returns any other HTTP status code except 200 (OK).
+    Returns:
+        HealthCheck: Returns a JSON response with the health status
+    """
+    return HealthCheck(status="OK")
 
 
 @prefix_router.post("/tasks", response_model=TaskItem)
